@@ -3,8 +3,8 @@ import type {ClassKey} from "keycloakify/login";
 import type {KcContext} from "./KcContext";
 import {useI18n} from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
-import Template from "./component/Template.tsx";
-import Register from "./component/Register.tsx";
+import Template from "./parts/Template.tsx";
+import Register from "./parts/Register.tsx";
 
 const UserProfileFormFields = lazy(
   () => import("keycloakify/login/UserProfileFormFields")
@@ -18,22 +18,12 @@ export default function KcPage(props: { kcContext: KcContext }) {
   const {i18n} = useI18n({kcContext});
 
   return (
-    <Suspense>
-      {(() => {
-        switch (kcContext.pageId) {
-          case "register.ftl":
-            return <Register
-              kcContext={kcContext}
-              i18n={i18n}
-              classes={classes}
-              Template={Template}
-              doUseDefaultCss={true}
-              UserProfileFormFields={UserProfileFormFields}
-              doMakeUserConfirmPassword={doMakeUserConfirmPassword}
-            />;
-          default:
-            return (
-              <DefaultPage
+    <>
+      <Suspense>
+        {(() => {
+          switch (kcContext.pageId) {
+            case "register.ftl":
+              return <Register
                 kcContext={kcContext}
                 i18n={i18n}
                 classes={classes}
@@ -41,11 +31,23 @@ export default function KcPage(props: { kcContext: KcContext }) {
                 doUseDefaultCss={true}
                 UserProfileFormFields={UserProfileFormFields}
                 doMakeUserConfirmPassword={doMakeUserConfirmPassword}
-              />
-            );
-        }
-      })()}
-    </Suspense>
+              />;
+            default:
+              return (
+                <DefaultPage
+                  kcContext={kcContext}
+                  i18n={i18n}
+                  classes={classes}
+                  Template={Template}
+                  doUseDefaultCss={true}
+                  UserProfileFormFields={UserProfileFormFields}
+                  doMakeUserConfirmPassword={doMakeUserConfirmPassword}
+                />
+              );
+          }
+        })()}
+      </Suspense>
+    </>
   );
 }
 

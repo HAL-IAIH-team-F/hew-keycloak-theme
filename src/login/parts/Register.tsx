@@ -7,13 +7,13 @@ import type {I18n} from "keycloakify/src/login/i18n";
 import type {LazyOrNot} from "keycloakify/tools/LazyOrNot";
 import type {UserProfileFormFieldsProps} from "keycloakify/login/UserProfileFormFieldsProps";
 import {kcSanitize} from "keycloakify/lib/kcSanitize";
+import Template from "./Template.tsx";
 
 export default function Register(
   {
     kcContext,
     i18n,
     doUseDefaultCss,
-    Template,
     classes,
     UserProfileFormFields,
     doMakeUserConfirmPassword
@@ -55,6 +55,7 @@ export default function Register(
       headerNode={messageHeader !== undefined ? advancedMsg(messageHeader) : msg("registerTitle")}
       displayMessage={messagesPerField.exists("global")}
       displayRequiredFields
+      loading={true}
     >
       <form id="kc-register-form" className={kcClsx("kcFormClass")} action={url.registrationAction} method="post"
             onSubmit={event => {

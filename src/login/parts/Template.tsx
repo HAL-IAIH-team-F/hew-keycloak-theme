@@ -21,7 +21,8 @@ export default function Template(
     i18n,
     doUseDefaultCss,
     classes,
-    children
+    children,
+    loading
   }: {
     kcContext: KcContext;
     i18n: I18n;
@@ -38,6 +39,7 @@ export default function Template(
     infoNode?: ReactNode;
     documentTitle?: string;
     bodyClassName?: string;
+    loading?: boolean;
   }) {
   const {kcClsx} = getKcClsx({doUseDefaultCss, classes});
 
@@ -74,40 +76,43 @@ export default function Template(
       </div>
       <div className={kcClsx("kcFormCardClass")}>
         <header className={kcClsx("kcFormHeaderClass")}>
-          {enabledLanguages.length > 1 && (
-            <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
-              <div id="kc-locale-wrapper" className={kcClsx("kcLocaleWrapperClass")}>
-                <div id="kc-locale-dropdown" className={clsx("menu-button-links", kcClsx("kcLocaleDropDownClass"))}>
-                  <button
-                    tabIndex={1}
-                    id="kc-current-locale-link"
-                    aria-label={msgStr("languages")}
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    aria-controls="language-switch1"
-                  >
-                    {currentLanguage.label}
-                  </button>
-                  <ul
-                    role="menu"
-                    tabIndex={-1}
-                    aria-labelledby="kc-current-locale-link"
-                    aria-activedescendant=""
-                    id="language-switch1"
-                    className={kcClsx("kcLocaleListClass")}
-                  >
-                    {enabledLanguages.map(({languageTag, label, href}, i) => (
-                      <li key={languageTag} className={kcClsx("kcLocaleListItemClass")} role="none">
-                        <a role="menuitem" id={`language-${i + 1}`} className={kcClsx("kcLocaleItemClass")} href={href}>
-                          {label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+          {!loading ?
+            enabledLanguages.length > 1 && (
+              <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
+                <div id="kc-locale-wrapper" className={kcClsx("kcLocaleWrapperClass")}>
+                  <div id="kc-locale-dropdown" className={clsx("menu-button-links", kcClsx("kcLocaleDropDownClass"))}>
+                    <button
+                      tabIndex={1}
+                      id="kc-current-locale-link"
+                      aria-label={msgStr("languages")}
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      aria-controls="language-switch1"
+                    >
+                      {currentLanguage.label}
+                    </button>
+                    <ul
+                      role="menu"
+                      tabIndex={-1}
+                      aria-labelledby="kc-current-locale-link"
+                      aria-activedescendant=""
+                      id="language-switch1"
+                      className={kcClsx("kcLocaleListClass")}
+                    >
+                      {enabledLanguages.map(({languageTag, label, href}, i) => (
+                        <li key={languageTag} className={kcClsx("kcLocaleListItemClass")} role="none">
+                          <a role="menuitem" id={`language-${i + 1}`} className={kcClsx("kcLocaleItemClass")} href={href}>
+                            {label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            ) :
+            undefined
+          }
           {(() => {
             const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
               <h1 id="kc-page-title">{headerNode}</h1>
