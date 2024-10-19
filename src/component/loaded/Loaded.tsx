@@ -8,7 +8,7 @@ export default function Loaded(
   return (
     <div
       style={{
-        background: "#4be5fc",
+        background: "#000",
         position: "fixed",
         width: "100%",
         height: "100%",
@@ -32,8 +32,8 @@ export default function Loaded(
         color={"#fff"}
       >
         <Animation>
-          <directionalLight args={[0xffffff, 2]} position={[10, 400, -500]}/>
-          <directionalLight args={[0xffffff, 3]} position={[5000, -5000, 400]}/>
+          {/*<ambientLight args={[0xffffff, 2]} position={[10, 400, -500]}/>*/}
+          <ambientLight args={[0xffffff, 0.001]} position={[0, 0, 500]}/>
           <FoamWithCircle/>
         </Animation>
       </Canvas>

@@ -30,8 +30,8 @@ export default function Foam(
     return props.simplex
   }, [props.simplex]);
   if (speed == undefined) speed = 40
-  if (spike == undefined) spike = 0.6
-  if (processing == undefined) processing = 1.3
+  if (spike == undefined) spike = 0.7
+  if (processing == undefined) processing = 1.1
 
   useFoamFrame(speed, spike, processing, geometry, positionAttributeBase, simplex,onFoamFrame)
 
