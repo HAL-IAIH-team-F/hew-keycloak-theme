@@ -33,8 +33,8 @@ export default function Loaded(
         color={"#fff"}
       >
         <Animation>
-          <directionalLight args={[0xffffff, .8]} position={[0, 40, -50]}/>
-          <directionalLight args={[0xffffff, 2]} position={[0, 0, 400]}/>
+          <directionalLight args={[0xffffff, 2]} position={[10, 400, -500]}/>
+          <directionalLight args={[0xffffff, 3]} position={[5000, -5000, 400]}/>
           <Foam/>
         </Animation>
       </Canvas>

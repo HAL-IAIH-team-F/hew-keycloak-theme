@@ -3,9 +3,9 @@ import {useMemo} from "react";
 import {SimplexNoise} from "three/examples/jsm/math/SimplexNoise.js";
 import {useFrame} from "@react-three/fiber";
 
-const speedDef = 170
-const spikesDef = 0.51
-const processingDef = 0.7
+const speedDef = 40
+const spikesDef = 0.6
+const processingDef = 1.3
 export default function Foam(
   {}: {}
 ) {
@@ -31,21 +31,20 @@ export default function Foam(
     positionAttribute.needsUpdate = true;
   })
 
-
+  const color = 0x91F0FFFF;
   return (
     <mesh geometry={geometry}>
       {/*<sphereGeometry args={[1.5, 128, 128]} />*/}
       <meshPhysicalMaterial args={[{
-        // wireframe: true,
-        color: 0xffffff,
+        color: color,
         transparent: true,
         side: THREE.DoubleSide,
-        transmission: 1,//透過率
+        transmission: 1.8,//透過率
         metalness: 0,//金属製
         roughness: 0,//粗さ
-        ior: 1.2,//屈折率
+        ior: 1.33,//屈折率
         specularIntensity: 1,//反射量
-        specularColor: 0xffffff,//反射色
+        specularColor: color,//反射色
       }]}/>
     </mesh>
   )
