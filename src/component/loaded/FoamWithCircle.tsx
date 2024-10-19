@@ -8,16 +8,19 @@ import {useTexture} from "@react-three/drei";
 export default function FoamWithCircle(
   {
     position,
+    radius,
+    texturePath,
   }: FoamWithCircleProps,
 ) {
   if (!position) position = [0, 0, 0]
+  if (!radius) radius = 1
 
   const geometry = useMemo(() => {
-    return new THREE.CircleGeometry(1, 64);
+    return new THREE.CircleGeometry(radius, 64);
   }, []);
   const baseAttribute = useMemo(() => geometry?.getAttribute('position')?.clone(), [geometry])
 
-  const texture = useTexture("2020-01-01_09.26.42.png")
+  const texture = useTexture(texturePath)
 
   return (
     <>
@@ -27,7 +30,7 @@ export default function FoamWithCircle(
             }}
       />
       <mesh position={position} geometry={geometry}>
-        <meshBasicMaterial map={texture} />
+        <meshBasicMaterial map={texture}/>
       </mesh>
     </>
   )
@@ -35,6 +38,8 @@ export default function FoamWithCircle(
 
 export interface FoamWithCircleProps {
   position?: Vector3
+  radius?: number
+  texturePath: string
 }
 
  

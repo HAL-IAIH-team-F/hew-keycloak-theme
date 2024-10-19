@@ -33,8 +33,8 @@ export default function Loaded(
       >
         <Animation>
           {/*<ambientLight args={[0xffffff, 2]} position={[10, 400, -500]}/>*/}
-          <ambientLight args={[0xffffff, 0.001]} position={[0, 0, 500]}/>
-          <FoamWithCircle/>
+          <ambientLight args={[0xffffff, 0.0001]} position={[0, 0, 10]}/>
+          <FoamWithCircle texturePath={"2020-01-01_09.26.42.png"}/>
         </Animation>
       </Canvas>
     </div>

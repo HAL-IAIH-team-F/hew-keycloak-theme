@@ -11,9 +11,11 @@ export default function Foam(
     processing,
     position,
     onFoamFrame,
+    radius,
     ...props
   }: {
     position?: Vector3,
+    radius?: number,
     simplex?: NoiseFunction3D,
     speed?: number,
     spike?: number,
@@ -21,8 +23,11 @@ export default function Foam(
     onFoamFrame?: (time: number, spikes: number, simplex: (x: number, y: number, z: number) => number) => void
   }
 ) {
+  if (!position) position = [0, 0, 0]
+  if (!radius) radius = 1
+
   const geometry = useMemo(() => {
-    return new THREE.SphereGeometry(1, 64, 64);
+    return new THREE.SphereGeometry(radius, 64, 64);
   }, []);
   const positionAttributeBase = useMemo(() => geometry?.getAttribute('position')?.clone(), [geometry])
   const simplex = useMemo(() => {
@@ -33,7 +38,7 @@ export default function Foam(
   if (spike == undefined) spike = 0.7
   if (processing == undefined) processing = 1.1
 
-  useFoamFrame(speed, spike, processing, geometry, positionAttributeBase, simplex,onFoamFrame)
+  useFoamFrame(speed, spike, processing, geometry, positionAttributeBase, simplex, onFoamFrame)
 
   const color = 0x91F0FFFF;
   return (
@@ -46,6 +51,7 @@ export default function Foam(
         transmission: 1.8,//透過率
         metalness: 0,//金属製
         roughness: 0,//粗さ
+        // ior: 0,//屈折率
         ior: 1.33,//屈折率
         specularIntensity: 1,//反射量
         specularColor: color,//反射色
