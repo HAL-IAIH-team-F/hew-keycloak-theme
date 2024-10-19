@@ -1,7 +1,6 @@
 import {Canvas} from "@react-three/fiber";
 import Animation from "./Animation.tsx";
-import Foam from "./Foam.tsx";
-import {WebGLShadowMap} from "three";
+import FoamWithCircle from "./FoamWithCircle.tsx";
 
 export default function Loaded(
   {}: LoadingProps,
@@ -35,7 +34,7 @@ export default function Loaded(
         <Animation>
           <directionalLight args={[0xffffff, 2]} position={[10, 400, -500]}/>
           <directionalLight args={[0xffffff, 3]} position={[5000, -5000, 400]}/>
-          <Foam/>
+          <FoamWithCircle/>
         </Animation>
       </Canvas>
     </div>
